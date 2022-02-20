@@ -16,6 +16,39 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `flyway_schema_history`
+--
+
+DROP TABLE IF EXISTS `flyway_schema_history`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!50503 SET character_set_client = utf8mb4 */;
+CREATE TABLE `flyway_schema_history` (
+                                         `installed_rank` int NOT NULL,
+                                         `version` varchar(50) DEFAULT NULL,
+                                         `description` varchar(200) NOT NULL,
+                                         `type` varchar(20) NOT NULL,
+                                         `script` varchar(1000) NOT NULL,
+                                         `checksum` int DEFAULT NULL,
+                                         `installed_by` varchar(100) NOT NULL,
+                                         `installed_on` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                         `execution_time` int NOT NULL,
+                                         `success` tinyint(1) NOT NULL,
+                                         PRIMARY KEY (`installed_rank`),
+                                         KEY `flyway_schema_history_s_idx` (`success`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `flyway_schema_history`
+--
+
+LOCK TABLES `flyway_schema_history` WRITE;
+/*!40000 ALTER TABLE `flyway_schema_history` DISABLE KEYS */;
+INSERT INTO `flyway_schema_history` VALUES (1,'1','init','SQL','V1__init.sql',1056831687,'root','2022-02-20 15:45:58',124,1);
+/*!40000 ALTER TABLE `flyway_schema_history` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `roles`
 --
 
@@ -36,7 +69,7 @@ CREATE TABLE `roles` (
 
 LOCK TABLES `roles` WRITE;
 /*!40000 ALTER TABLE `roles` DISABLE KEYS */;
-INSERT INTO `roles` VALUES (1,'SYSTEM_ADMIN',NULL),(2,'OFFICE_WORKER',NULL),(3,'WAREHOUSE_WORKER',NULL),(4,'FACTORY_WORKER',NULL),(5,'MANAGER',NULL);
+INSERT INTO `roles` VALUES (1,'ROLE_SYSTEM_ADMIN',NULL),(2,'ROLE_OFFICE_WORKER',NULL),(3,'ROLE_WAREHOUSE_WORKER',NULL),(4,'ROLE_FACTORY_WORKER',NULL),(5,'ROLE_MANAGER',NULL);
 /*!40000 ALTER TABLE `roles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -119,7 +152,7 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'emirhan.oguz@gmail.com',_binary '','Emirhan','Oğuz','123456'),(2,'berke.tinas@gmail.com',_binary '','Berke','Tinas','123456'),(3,'berkay.aydın@gmail.com',_binary '','Berkay','Aydın','123456'),(4,'serap.sahin@gmail.com',_binary '','Serap','Şahin','123456');
+INSERT INTO `users` VALUES (1,'emirhan.oguz@gmail.com',_binary '','Emirhan','Oğuz','$2a$10$u1NSV0fqQ8X17dHfut1Rj.rOHn.xbKe3Wut8.zHjvjQl/MzelWDHa'),(2,'berke.tinas@gmail.com',_binary '','Berke','Tinas','$2a$10$u1NSV0fqQ8X17dHfut1Rj.rOHn.xbKe3Wut8.zHjvjQl/MzelWDHa'),(3,'berkay.aydın@gmail.com',_binary '','Berkay','Aydın','$2a$10$u1NSV0fqQ8X17dHfut1Rj.rOHn.xbKe3Wut8.zHjvjQl/MzelWDHa'),(4,'serap.sahin@gmail.com',_binary '','Serap','Şahin','$2a$10$u1NSV0fqQ8X17dHfut1Rj.rOHn.xbKe3Wut8.zHjvjQl/MzelWDHa');
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -132,4 +165,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-02-20 18:42:37
+-- Dump completed on 2022-02-20 22:22:04
