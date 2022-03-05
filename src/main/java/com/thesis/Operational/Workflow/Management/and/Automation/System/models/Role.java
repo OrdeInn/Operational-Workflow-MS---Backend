@@ -12,7 +12,6 @@ import javax.persistence.*;
 @Setter
 public class Role {
 
-    @ApiModelProperty(hidden = true,example = "0")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

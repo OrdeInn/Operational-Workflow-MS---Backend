@@ -1,6 +1,7 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings.Building;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
@@ -15,7 +16,6 @@ import java.util.Set;
 @Setter
 public class User {
 
-    @ApiModelProperty(hidden = true,example = "0")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -34,6 +34,9 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
+
+    @ManyToOne
+    private Building building;
 
     public boolean hasRole(ERole role) {
 

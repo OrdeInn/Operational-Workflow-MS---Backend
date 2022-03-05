@@ -24,6 +24,8 @@ public class JwtResponse {
 
     private List<String> roles;
 
+    private BuildingResponse building;
+
     public JwtResponse(String accessToken, Long id, String email, List<String> roles) {
 
         this.token = accessToken;
@@ -40,5 +42,7 @@ public class JwtResponse {
         this.lastName = user.getLName();
         this.email = user.getEmail();
         this.roles = roles;
+        if(user.getBuilding() != null)
+            this.building = new BuildingResponse(user.getBuilding());
     }
 }
