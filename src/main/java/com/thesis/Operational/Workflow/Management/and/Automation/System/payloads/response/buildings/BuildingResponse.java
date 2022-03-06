@@ -1,4 +1,4 @@
-package com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.response;
+package com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.response.buildings;
 
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings.Building;
 import lombok.Getter;

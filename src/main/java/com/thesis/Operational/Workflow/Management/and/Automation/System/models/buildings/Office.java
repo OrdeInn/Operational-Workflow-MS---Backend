@@ -1,7 +1,6 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings;
 
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.User;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 

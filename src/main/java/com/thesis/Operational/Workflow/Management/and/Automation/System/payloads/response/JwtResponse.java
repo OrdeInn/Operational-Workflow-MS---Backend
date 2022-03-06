@@ -1,6 +1,7 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.response;
 
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.User;
+import com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.response.buildings.BuildingResponse;
 import lombok.Getter;
 import lombok.Setter;
 

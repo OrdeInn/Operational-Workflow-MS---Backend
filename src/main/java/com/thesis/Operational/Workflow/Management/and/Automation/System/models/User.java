@@ -1,6 +1,7 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.thesis.Operational.Workflow.Management.and.Automation.System.models.base.BaseEntity;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings.Building;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -14,7 +15,7 @@ import java.util.Set;
 @Table(name = "users", uniqueConstraints = { @UniqueConstraint(columnNames = "email") })
 @Getter
 @Setter
-public class User {
+public class User extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
