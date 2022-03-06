@@ -47,7 +47,6 @@ public class OfficeController {
         officePage.forEach(office -> {
             responseList.add(new OfficeResponse(office));
         });
-        System.out.println(responseList.size());
         Page<OfficeResponse> responsePage = new PageImpl<>(responseList, officePage.getPageable(), officePage.getTotalElements());
         return ResponseEntity.ok(responsePage);
     }
@@ -71,8 +70,11 @@ public class OfficeController {
 
         Office office = officeService.editOffice(request, employees);
 
+        for (User employee : employees){
+            employee.setBuilding(office);
+        }
+        userService.saveAll(employees);
+
         return ResponseEntity.ok(new OfficeResponse(office));
     }
-
-
 }
