@@ -1,6 +1,5 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.services.base;
 
-import com.thesis.Operational.Workflow.Management.and.Automation.System.exceptions.ResourceNotFoundException;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.base.BaseEntity;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.repositories.base.BaseRepository;
 import org.springframework.data.domain.Page;
@@ -29,7 +28,7 @@ public class BaseService<T extends BaseEntity, ID extends Serializable> {
     public T findById(ID id){
 
         Optional<T> t = baseRepository.findById(id);
-        return t.orElseThrow(()-> new ResourceNotFoundException(resourceName, id));
+        return t.orElse(null);
     }
 
     public <S extends T> S save(S s){
