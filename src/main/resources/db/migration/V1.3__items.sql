@@ -1,11 +1,11 @@
 CREATE TABLE `category` (
-    `id` bigint NOT NULL,
+    `id` bigint NOT NULL AUTO_INCREMENT,
     `name` varchar(255) DEFAULT NULL,
     PRIMARY KEY (`id`)
 );
 
 CREATE TABLE `product` (
-    `id` bigint NOT NULL,
+    `id` bigint NOT NULL AUTO_INCREMENT,
     `name` varchar(255) DEFAULT NULL,
     `category_id` bigint NOT NULL,
     `price` double NOT NULL,
@@ -14,7 +14,7 @@ CREATE TABLE `product` (
 );
 
 CREATE TABLE `supply` (
-    `id` bigint NOT NULL,
+    `id` bigint NOT NULL AUTO_INCREMENT,
     `name` varchar(255) DEFAULT NULL,
     `category_id` bigint NOT NULL,
     PRIMARY KEY (`id`),
