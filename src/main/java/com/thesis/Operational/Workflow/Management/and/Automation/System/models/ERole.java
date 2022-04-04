@@ -34,6 +34,14 @@ public enum ERole {
             return "Factory Worker";
         }
     },
+    ROLE_GRAPHICS_DESIGNER {
+
+        @Override
+        public String toString() {
+
+            return "Graphics Designer";
+        }
+    },
     ROLE_MANAGER {
 
         @Override
@@ -60,6 +68,9 @@ public enum ERole {
 
             case("Manager"):
                 return ROLE_MANAGER;
+
+            case("Graphics Designer"):
+                return ROLE_GRAPHICS_DESIGNER;
         }
 
         return null;

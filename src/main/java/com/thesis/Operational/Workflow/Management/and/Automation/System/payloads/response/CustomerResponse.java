@@ -25,7 +25,7 @@ public class CustomerResponse {
         this.firstName = customer.getFName();
         this.lastName = customer.getLName();
         this.email = customer.getEmail();
-        this.address = customer.getEmail();
+        this.address = customer.getAddress();
         this.balance = customer.getBalance();
     }
 }
