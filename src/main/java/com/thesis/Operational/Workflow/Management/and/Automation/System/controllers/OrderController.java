@@ -84,6 +84,8 @@ public class OrderController {
         }
 
         Order order = orderService.createNewOrder(request, basket, customer);
+        customer.setBalance(customer.getBalance()-order.getTotalCost());
+        customerService.save(customer);
 
         return ResponseEntity.ok(new OrderResponse(order));
     }
