@@ -1,5 +1,6 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings;
 
+import com.thesis.Operational.Workflow.Management.and.Automation.System.models.SupplyRequest;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.User;
 import lombok.Getter;
 import lombok.Setter;
@@ -20,4 +21,10 @@ public class Factory extends Building{
 
     @OneToMany(mappedBy = "building")
     private Set<User> employees = new HashSet<>();
+
+    @OneToMany(mappedBy = "factory")
+    private Set<SupplyRequest> supplyRequests;
+
+    @ManyToOne
+    private Warehouse warehouse;
 }

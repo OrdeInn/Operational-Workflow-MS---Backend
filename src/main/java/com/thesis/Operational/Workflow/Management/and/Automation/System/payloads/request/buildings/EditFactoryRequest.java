@@ -11,4 +11,5 @@ public class EditFactoryRequest extends EditBuildingRequest{
 
     private Set<Long> employees;
 
+    private Long warehouseId;
 }

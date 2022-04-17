@@ -14,8 +14,11 @@ public class FactoryResponse extends BuildingResponse{
 
     private Set<UserResponse> employees;
 
+    private String warehouse;
+
     public FactoryResponse(Factory factory) {
         super(factory);
         this.employees = factory.getEmployees().stream().map(UserResponse::new).collect(Collectors.toSet());
+        this.warehouse = factory.getWarehouse().getName();
     }
 }

@@ -1,12 +1,15 @@
 package com.thesis.Operational.Workflow.Management.and.Automation.System.controllers.buildings;
 
+import com.thesis.Operational.Workflow.Management.and.Automation.System.exceptions.ResourceNotFoundException;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.User;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings.Factory;
+import com.thesis.Operational.Workflow.Management.and.Automation.System.models.buildings.Warehouse;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.request.buildings.EditFactoryRequest;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.request.buildings.NewFactoryRequest;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.payloads.response.buildings.FactoryResponse;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.services.UserService;
 import com.thesis.Operational.Workflow.Management.and.Automation.System.services.buildings.FactoryService;
+import com.thesis.Operational.Workflow.Management.and.Automation.System.services.buildings.WarehouseService;
 import io.swagger.annotations.Api;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -26,11 +29,13 @@ import java.util.Set;
 public class FactoryController {
 
     private final FactoryService factoryService;
+    private final WarehouseService warehouseService;
     private final UserService userService;
 
-    public FactoryController(FactoryService factoryService, UserService userService) {
+    public FactoryController(FactoryService factoryService, UserService userService, WarehouseService warehouseService) {
         this.factoryService = factoryService;
         this.userService = userService;
+        this.warehouseService = warehouseService;
     }
 
     @GetMapping("")
@@ -54,7 +59,11 @@ public class FactoryController {
     @PostMapping("")
     public ResponseEntity<FactoryResponse> createNewFactory(@RequestBody NewFactoryRequest request){
 
-        Factory factory = factoryService.createNewFactory(request);
+        Warehouse warehouse = warehouseService.findById(request.getWarehouseId());
+        if(warehouse == null)
+            throw new ResourceNotFoundException("Warehouse", request.getWarehouseId());
+
+        Factory factory = factoryService.createNewFactory(request, warehouse);
         return ResponseEntity.ok(new FactoryResponse(factory));
     }
 
@@ -62,13 +71,16 @@ public class FactoryController {
     public ResponseEntity<FactoryResponse> editFactory(@RequestBody EditFactoryRequest request){
 
         Set<User> employees = new HashSet<>();
-        request.getEmployees().forEach(userId -> {
-            User user = userService.findById(userId);
-            if(user != null)
-                employees.add(user);
-        });
+        if(request.getEmployees() != null || !request.getEmployees().isEmpty()){
+            request.getEmployees().forEach(userId -> {
+                User user = userService.findById(userId);
+                if(user != null)
+                    employees.add(user);
+            });
+        }
 
-        Factory factory = factoryService.editFactory(request, employees);
+        Warehouse warehouse = warehouseService.findById(request.getWarehouseId());
+        Factory factory = factoryService.editFactory(request, employees, warehouse);
 
         for (User employee : employees){
             employee.setBuilding(factory);
